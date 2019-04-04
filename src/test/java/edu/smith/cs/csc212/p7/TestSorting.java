@@ -43,9 +43,11 @@ public class TestSorting {
 		Random rand = new Random(13);
 		// For good measure, let's shuffle it and sort it again to see if that works, too.
 		sortMe.shuffle(rand);
-		System.out.println(sortMe.toJava());
 		BubbleSort.bubbleSort(sortMe);
 		Assert.assertTrue(checkSorted(sortMe));
+		
+		// check it is the original size
+		Assert.assertEquals(sortMe.size(), data.length);
 	}
 	
 	@Test
@@ -55,7 +57,125 @@ public class TestSorting {
 		
 		BubbleSort.bubbleSort(sortMe);
 		Assert.assertTrue(checkSorted(sortMe));
-	}
+		
+		// check it is the original size
+		Assert.assertEquals(sortMe.size(), 9);
 
+	}
+	
+	@Test
+	public void testSlice() {
+		ListADT<Integer> sortMe = new JavaList<>(Arrays.asList(35, 88, 11, 47, 14, 24, 41, 62, 27));
+		int mid = sortMe.size()/2;
+		ListADT<Integer> leftSlice = sortMe.slice(0, mid);
+		ListADT<Integer> rightSlice = sortMe.slice(mid, sortMe.size());
+		
+		Assert.assertEquals(leftSlice.toJava(), Arrays.asList(35, 88, 11, 47));
+		Assert.assertEquals(rightSlice.toJava(), Arrays.asList(14, 24, 41, 62, 27));
+		
+		Assert.assertEquals(14, (int) rightSlice.removeFront());
+		Assert.assertEquals(4, rightSlice.size());
+		Assert.assertEquals(27, (int) rightSlice.removeBack());
+		Assert.assertEquals(3, rightSlice.size());
+	}
+	@Test
+	public void testSelectionSort() {
+		// See if the data can be reversed:
+		ListADT<Integer> sortMe = new JavaList<>();
+		for (int y : data) {
+			sortMe.addBack(y);
+		}
+		SelectionSort.SelectionSort(sortMe);
+		Assert.assertTrue(checkSorted(sortMe));
+		
+		Random rand = new Random(13);
+		// For good measure, let's shuffle it and sort it again to see if that works, too.
+		sortMe.shuffle(rand);
+		SelectionSort.SelectionSort(sortMe);
+		Assert.assertTrue(checkSorted(sortMe));
+		
+		// check it is the original size
+		Assert.assertEquals(sortMe.size(), data.length);
+	}
+	
+	@Test
+	public void testClassSelectionSort() {
+		// See if the data can be reversed:
+		ListADT<Integer> sortMe = new JavaList<>(Arrays.asList(35, 88, 11, 47, 14, 24, 41, 62, 27));
+		
+		SelectionSort.SelectionSort(sortMe);
+		Assert.assertTrue(checkSorted(sortMe));
+		
+		// check it is the original size
+		Assert.assertEquals(sortMe.size(), 9);
+
+	}
+	@Test
+	public void testInsertionSort() {
+		// See if the data can be reversed:
+		ListADT<Integer> sortMe = new JavaList<>();
+		for (int y : data) {
+			sortMe.addBack(y);
+		}
+		InsertionSort.InsertionSort(sortMe);
+		Assert.assertTrue(checkSorted(sortMe));
+		
+		Random rand = new Random(13);
+		// For good measure, let's shuffle it and sort it again to see if that works, too.
+		sortMe.shuffle(rand);
+		InsertionSort.InsertionSort(sortMe);
+		Assert.assertTrue(checkSorted(sortMe));
+		
+		// check it is the original size
+		Assert.assertEquals(sortMe.size(), data.length);
+	}
+	
+	@Test
+	public void testClassInsertionSort() {
+		// See if the data can be reversed:
+		ListADT<Integer> sortMe = new JavaList<>(Arrays.asList(35, 88, 11, 47, 14, 24, 41, 62, 27));
+		
+		InsertionSort.InsertionSort(sortMe);
+		Assert.assertTrue(checkSorted(sortMe));
+		
+		// check it is the original size
+		Assert.assertEquals(sortMe.size(), 9);
+
+	}
+	
+	@Test
+	public void testMergeSort() {
+		// See if the data can be reversed:
+		ListADT<Integer> sortMe = new JavaList<>();
+		for (int y : data) {
+			sortMe.addBack(y);
+		}
+		ListADT<Integer> result =new JavaList<>();
+		result = MergeSort.recursiveMergeSort(sortMe);
+		Assert.assertTrue(checkSorted(result));
+		
+		Random rand = new Random(13);
+		// For good measure, let's shuffle it and sort it again to see if that works, too.
+		sortMe.shuffle(rand);
+		result = MergeSort.recursiveMergeSort(sortMe);
+		Assert.assertTrue(checkSorted(result));
+		
+		// check it is the original size
+		Assert.assertEquals(sortMe.size(), data.length);
+	}
+	
+	@Test
+	public void testClassMergeSort() {
+		// See if the data can be reversed:
+		ListADT<Integer> sortMe = new JavaList<>(Arrays.asList(35, 88, 11, 47, 14, 24, 41, 62, 27));
+		
+		ListADT<Integer> result =new JavaList<>();
+		result = MergeSort.recursiveMergeSort(sortMe);
+		Assert.assertTrue(checkSorted(result));
+		
+		// check it is the original size
+		Assert.assertEquals(sortMe.size(), 9);
+
+	}
 
 }
