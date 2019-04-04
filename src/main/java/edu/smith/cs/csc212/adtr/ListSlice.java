@@ -11,7 +11,7 @@ public class ListSlice<T> extends ListADT<T> {
 		this.fullList.checkInclusiveIndex(end);
 		this.begin = begin;
 		this.end = end;
-		}
+	}
 	
 	@Override
 	public boolean isEmpty() {
@@ -69,17 +69,18 @@ public class ListSlice<T> extends ListADT<T> {
 
 	@Override
 	public T removeBack() {
-	checkNotEmpty();
-	T found = this.getBack();
-	this.end--;
-	return found;
+		checkNotEmpty();
+		T found = this.getBack();
+		this.end--;
+		return found;
 	}
 
 	@Override
 	public T removeFront() {
-	checkNotEmpty();
-	T found = this.getFront();
-	this.begin++;
-	return found;
+		checkNotEmpty();
+		T found = this.getFront();
+		this.begin++;
+		return found;
 	}
+
 }

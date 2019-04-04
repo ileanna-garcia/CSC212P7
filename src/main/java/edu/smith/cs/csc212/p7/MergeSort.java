@@ -33,19 +33,20 @@ public class MergeSort {
 			else {
 				result.addBack(right.removeFront());
 			}
-			
-			if(left.size() != 0) {
-				for(int i = 0; i<right.size(); i++){
-					result.addBack(right.getFront());
-			    }					
+		}
+		if(right.size() != 0) {
+			int N = right.size();
+			for(int i = 0; i<N; i++){
+				result.addBack(right.removeFront());	
+		    }					
+	    }
+		
+		if(left.size() != 0) {
+			int N = left.size();
+			for(int i = 0 ;i<N; i++){
+				result.addBack(left.removeFront());
 		    }
-			
-			if(right.size() != 0) {
-				for(int i = 0 ;i<left.size(); i++){
-					result.addBack(left.getFront());
-			    }
-		    }
-	}
+		}
 		return result;
 		
 }
@@ -62,20 +63,31 @@ public class MergeSort {
 		}
 	
 	public static <T> ListADT<Integer> iterativeMergeSort (ListADT<Integer> input)	{
-		    ListADT<Integer> result =new JavaList<>();
             DoublyLinkedList <ListADT<Integer>> queue = new DoublyLinkedList <ListADT<Integer>> ();
-            for (int element : result) {
-            	ListADT<Integer> list =new JavaList<Integer>();
+           
+            for (int element : input) {
+            	ListADT<Integer> list = new JavaList<Integer>();
             	list.addFront(element);
             	queue.addBack(list);
             }
-            while(queue.size()>1) {
+            
+            
+            while(queue.size() > 1) {
+                System.out.println(queue);
+
             	ListADT<Integer> first = queue.removeFront();
             	ListADT<Integer> second = queue.removeFront();
             	ListADT<Integer> combined = combineMergeSort(first,second);
+            	
+            	System.out.println("During while loop" + combined);
+            	
             	queue.addBack(combined);
+            	System.out.println("During while loop" + queue);
             }
-	   return queue.getFront();
+      
+            System.out.println("This is the front of the queue " + queue.getFront());
+	   
+            return queue.getFront();
 	}
 	
 }

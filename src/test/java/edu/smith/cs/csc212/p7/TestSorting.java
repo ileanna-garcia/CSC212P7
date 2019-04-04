@@ -177,5 +177,38 @@ public class TestSorting {
 		Assert.assertEquals(sortMe.size(), 9);
 
 	}
+	public void testIterativeMergeSort() {
+		// See if the data can be reversed:
+		ListADT<Integer> sortMe = new JavaList<>();
+		for (int y : data) {
+			sortMe.addBack(y);
+		}
+		ListADT<Integer> result =new JavaList<>();
+		result = MergeSort.iterativeMergeSort(sortMe);
+		Assert.assertTrue(checkSorted(result));
+		
+		Random rand = new Random(13);
+		// For good measure, let's shuffle it and sort it again to see if that works, too.
+		sortMe.shuffle(rand);
+		result = MergeSort.iterativeMergeSort(sortMe);
+		Assert.assertTrue(checkSorted(result));
+		
+		// check it is the original size
+		Assert.assertEquals(sortMe.size(), data.length);
+	}
+	
+	@Test
+	public void testClassIterativeMergeSort() {
+		// See if the data can be reversed:
+		ListADT<Integer> sortMe = new JavaList<>(Arrays.asList(35, 88, 11, 47, 14, 24, 41, 62, 27));
+		
+		ListADT<Integer> result =new JavaList<>();
+		result = MergeSort.iterativeMergeSort(sortMe);
+		Assert.assertTrue(checkSorted(result));
+		
+		// check it is the original size
+		Assert.assertEquals(sortMe.size(), 9);
+
+	}
 
 }

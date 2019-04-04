@@ -20,9 +20,18 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	@Override
 	public T removeFront() {
 		checkNotEmpty();
-		T value = start.value;
+		if(start.after == null && start.before == null) {
+			Node <T> first = start;
+			start = null;
+			end = null;
+			return first.value;
+		}
+		else {
+		Node <T> first = start;
 		this.start = start.after;
-		return value;
+		start.before = null;
+		return first.value;
+		}
 	}
 
 	@Override
